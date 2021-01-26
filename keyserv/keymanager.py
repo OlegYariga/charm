@@ -1,25 +1,3 @@
-# MIT License
-
-# Copyright (c) 2019 Samuel Hoffman
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import secrets
 import string
 from datetime import datetime
@@ -30,6 +8,21 @@ from flask_login import current_user
 from sqlalchemy import exists
 
 from keyserv.models import AuditLog, Event, Key, db
+
+class Memo:
+    """Memo that identifies a key action."""
+
+    def __init__(self, ip, machine, user, hardware_id=None):
+        self.ip = ip
+        self.machine = machine
+        self.user = user
+        self.hwid = hardware_id
+
+    def __str__(self):
+        return f"IP: {self.ip}, Machine: {self.machine}, User: {self.user}"
+
+    def __repr__(self):
+        return f"<Origin({self.ip}, {self.machine}, {self.user})>"
 
 
 class ExhuastedActivations(Exception):
