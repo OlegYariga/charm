@@ -4,7 +4,7 @@
 class DefaultConfig(object):
     # a decent way to generate a secret key is by running: python -c "import os; print(repr(os.urandom(24)))"
     # then pasting the output here.
-    SECRET_KEY = "3f5f72e6-0064-4372-a957-bf405b3b5bf9"
+    SECRET_KEY = ""
 
     DEBUG = False
     TESTING = False
